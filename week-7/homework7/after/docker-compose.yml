@@ -1,0 +1,46 @@
+services:
+  web:
+    build: .
+    image: mywebapp
+    ports:
+      - "127.0.0.1:15000:5000" # Restricting to localhost
+    volumes:
+      - .:/app
+    command: flask run --host=0.0.0.0 --port=5000
+    environment:
+      - FLASK_APP:app.py
+      - FLASK_ENV:development
+    depends_on:
+      - db
+    networks:
+      - frontend
+    read_only: true # Making filesystem read-only
+    # This mounts the container's root filesystem as read-only. This means that once the container starts, the application running inside cannot write to or modify any files within its own filesystem.
+    # This is a strong defense against attackers. If an attacker manages to compromise your application and gain code execution within the container, they will be severely limited in their ability to:
+    # 1. Install malicious tools or malware.
+    # 2. Modify application files to maintain persistence or alter behavior.
+    # 3. Clean up their tracks by deleting logs or evidence. It forces attackers to operate only in memory or within explicitly writable areas, making their activities much harder and often impossible.
+    security_opt:
+      - no-new-privileges # Preventing privilege escalation
+    # This setting prevents processes within the container from gaining new privileges.
+    # Specifically, it disables the use of setuid and setgid bits on executable files, which are mechanisms that allow a program to run with the permissions of the file's owner or group,
+    # even if the user executing it normally has fewer privileges.
+    mem_limit: 128m # Setting a memory limit
+    # This sets a hard limit on the amount of memory (RAM) that the container is allowed to use.
+    # If the container tries to use more memory than this limit, the Docker daemon will typically kill the process(es) inside the container.
+    # This is a crucial control against Denial of Service (DoS) attacks based on resource exhaustion.
+    # A malicious or buggy application could otherwise consume all available memory on the host machine, impacting other containers and the host itself.
+    # Setting a memory limit prevents a single container from starving the entire system of memory.
+    pids_limit: 50 # Setting a process ID limit
+    # This sets a limit on the number of processes that the container is allowed to create. Each running program or thread within a container counts towards this limit.
+    # This helps mitigate "fork bomb" or process exhaustion DoS attacks. An attacker could try to make the application rapidly create a huge number of processes, overwhelming the system's process table.
+    # Setting a pids_limit contains this type of attack within the specific container, preventing it from affecting the host or other containers.
+  db:
+    image: postgres:13
+    env_file:
+      - .env # Using .env file for database secrets
+    networks:
+      - backend
+networks:
+  frontend:
+  backend:
