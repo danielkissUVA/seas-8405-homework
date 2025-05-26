@@ -1,0 +1,48 @@
+Implementing a Secure IAM Architecture
+
+In this assignment, you will design and implement a secure Identity and Access Management (IAM) architecture using Keycloak as the identity provider and a Flask application as a protected microservice. You will configure OAuth 2.0 and OpenID Connect (OIDC) to secure the Flask API, ensuring that only authenticated and authorized users can access protected resources. Additionally, you will analyze potential security risks and apply best practices to mitigate them.
+Assignment Instructions
+
+Part 1: Environment Setup and Configuration (Hands-on)
+
+In this part, you will set up the IAM architecture using Docker Compose, Keycloak, and a Flask application. Since no code is provided explicitly for this assignment, you can refer to the code in the lab1, lab2, and lab3 directories in the course GitHub repository as a reference. However, you are expected to implement your own solution based on the concepts covered in the course.
+Set Up Keycloak:
+Use Docker Compose to start Keycloak and the Flask app.
+Configure Keycloak with a custom realm, client, and user. Adapt the configuration based on examples from the lab directories.
+Protect the Flask API:
+Implement token validation in the Flask app to secure protected routes.
+Ensure the API correctly handles authenticated and unauthenticated requests. Please see lab samples for reference.
+Test the Setup:
+Automate the configuration if possible (e.g., using a script).
+Test the API with and without a valid token to ensure access controls are enforced.
+
+Part 2: Security Analysis and Best Practices (Write-up)
+
+Threat Modeling:
+Identify potential security threats to the IAM architecture using the STRIDE methodology.
+Focus on threats related to authentication, authorization, and token management.
+Mitigation Strategies:
+Propose and implement strategies to mitigate the identified threats.
+Consider best practices such as token expiration, revocation, and secure storage of secrets.
+Deliverables
+
+For your homework submission, you are expected to submit the following:
+Code: A link to your GitHub repository containing all code and configuration files (e.g., docker-compose.yml, Flask app code, Keycloak configuration). Ensure the repository is publicly accessible. I should be able to test the environment fully using "make reset" command (please see lab examples for reference).
+Screen Recording: A video (5-10 minutes) demonstrating your setup, including:
+Starting the services using Docker Compose.
+Configuring Keycloak (showing the realm, client, and user setup).
+Retrieving an access token.
+Making requests to the Flask API with and without a valid token.
+Explaining the security measures you implemented and how they mitigate potential threats.
+Report: A PDF document (2-3 pages) that includes:
+An architecture diagram of your IAM setup.
+An explanation of the OAuth 2.0 and OIDC flows used.
+A security analysis with threat modeling (using STRIDE) and mitigation strategies.
+A reflection on the Okta case study and its impact on your design.
+Grading Rubric
+
+Category	Excellent (90–100%)	Good (80–89%)	Satisfactory (70–79%)	Needs Improvement (60–69%)	Unsatisfactory (0–59%)
+Code Implementation	Fully functional and secure code with proper configuration.	Mostly functional with minor issues.	Basic functionality with some errors.	Incomplete or incorrect implementation.	No functional code.
+Screen Recording	Clear, well-explained demonstration covering all required aspects.	Mostly clear with minor omissions.	Adequate but lacks some explanations or demonstrations.	Unclear or missing key demonstrations.	No recording or unusable.
+Report	Comprehensive, well-organized, and insightful.	Good content with minor organizational issues.	Basic content with some gaps.	Poorly written or incomplete.	No report.
+Security Analysis	In-depth analysis with effective mitigation strategies.	Good analysis with some strategies.	Basic analysis with limited depth.	Incomplete or incorrect analysis.	No analysis.
