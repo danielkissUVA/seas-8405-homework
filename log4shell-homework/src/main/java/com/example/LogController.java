@@ -10,9 +10,9 @@ public class LogController {
 
     @PostMapping("/log")
     public String logInput(@RequestBody String input) {
-        //if (input.contains("${jndi:")) {
-        //    return "Invalid input detected!";
-        //}
+        if (input.contains("${jndi:")) {
+            return "Invalid input detected!";
+        }
         logger.info(input);
         return "Logged: " + input;
     }

@@ -8,3 +8,4 @@ export JAVA_TOOL_OPTIONS="-Dlog4j2.formatMsgNoLookups=false \
 
 # Execute the Java application. The JVM will pick up JAVA_TOOL_OPTIONS.
 exec java -jar /app.jar
+

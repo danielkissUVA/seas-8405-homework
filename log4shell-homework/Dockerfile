@@ -12,4 +12,10 @@ COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Set the script as the ENTRYPOINT
-ENTRYPOINT ["docker-entrypoint.sh"]
+#ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["java", \
+            "-Dlog4j2.debug=true", \
+            "-Dlog4j2.formatMsgNoLookups=false", \
+            "-Dcom.sun.jndi.ldap.object.trustURLCodebase=true", \
+            "-Dcom.sun.jndi.ldap.object.factories=*", \
+            "-jar", "/app.jar"]
